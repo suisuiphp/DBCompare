@@ -1,0 +1,12 @@
+*** Settings ***
+Resource          dbresource.robot
+
+*** Test Cases ***
+compare-all-tablenames-in-db
+    [Documentation]    对比两个数据库表名是否完全一致
+    ...    查看新增表名
+    ...    查看删除表名
+    [Tags]    tablename
+    @{tablesInTargetdb}    listTablesInDb    mysql,root/6tfc^YHN@10.0.127.14:3306/sodap_dev
+    ${tablesInTargetdb_str}    join    ${tablesInTargetdb}
+    assertTablesInDb    mysql,root/6tfc^YHN@10.0.127.14:3306/sodap    ${tablesInTargetdb_str}

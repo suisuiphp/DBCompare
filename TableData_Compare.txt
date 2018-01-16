@@ -1,0 +1,13 @@
+*** Settings ***
+Resource          dbresource.robot
+
+*** Test Cases ***
+compare-all-data-in-db
+    [Tags]    data
+    @{tablesInTargetdb}    listTablesInDb    mysql,root/6tfc^YHN@10.0.127.14:3306/zhuoyan_test
+    ${tablesInTargetdb_str}    join    ${tablesInTargetdb}
+    assertTabledataBetweenDb    mysql,root/6tfc^YHN@10.0.127.14:3306/zhuoyan    mysql,root/6tfc^YHN@10.0.127.14:3306/zhuoyan_test    ${tablesInTargetdb_str}
+
+comparel-data-in-db-singletabledata
+    [Tags]    data
+    assertTabledataBetweenDb    mysql,root/6tfc^YHN@10.0.127.14:3306/sodap    mysql,root/6tfc^YHN@10.0.127.14:3306/sodap_dev    devices_count
